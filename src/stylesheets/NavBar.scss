@@ -1,0 +1,32 @@
+.navbar-custom {
+  background-color: #0A70A7;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+
+  .nav-link {
+    color: white;
+    font-weight: 500;
+
+    &:hover {
+      color: #ffc107;
+    }
+
+    &.active {
+      font-weight: bold;
+      border-bottom: 2px solid #ffc107;
+    }
+  }
+
+  .navbar-brand img {
+    height: 40px;
+  }
+
+  .btn-warning {
+    font-weight: bold;
+    color: white;
+
+    &:hover {
+      background-color: #e0a800;
+    }
+  }
+}

@@ -1,0 +1,33 @@
+// servicios.scss
+.info-block {
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+  text-align: center;
+
+  &.red-block {
+    background-color: #f8d7da;
+    color: #842029;
+    border-color: #f5c2c7;
+  }
+}
+
+// Estilos para las tarjetas
+.service-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 20px;
+
+  img {
+    width: 150px;
+    border-radius: 8px;
+    margin-right: 20px;
+  }
+
+  .card-body {
+    flex: 1;
+  }
+}
