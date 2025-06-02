@@ -11,7 +11,7 @@ export const NavBar = () => {
   const handleSolicitarHora = (e) => {
     e.preventDefault();
     if (isLoggedIn) {
-      navigate('/agendarHora'); // Ruta de la vista "Solicitar hora"
+      navigate('/agendarHora');
     } else {
       alert('Debes iniciar sesión para solicitar una hora.');
     }
@@ -19,7 +19,7 @@ export const NavBar = () => {
 
   const handleLogout = () => {
     logout();
-    navigate('/');  // Redirige a la página principal después de cerrar sesión
+    navigate('/');
   }
 
   const navLinkClass = ({ isActive }) =>
@@ -46,17 +46,23 @@ export const NavBar = () => {
               <NavLink to="/contacto" className={navLinkClass}>Contacto</NavLink>
             </li>
             <li className="nav-item">
-              {/* Aquí el link de solicitar hora */}
               <a href="#" className="nav-link" onClick={handleSolicitarHora}>Solicitar hora</a>
             </li>
           </ul>
-          {isLoggedIn ? (
-            <button className="btn btn-outline-light" onClick={handleLogout}>
-              <i className="bi bi-box-arrow-right me-2"></i> Cerrar sesión
-            </button>
-          ) : (
-            <NavLink to="/login" className="btn btn-warning fw-bold">Login</NavLink>
-          )}
+
+          <div className="d-flex align-items-center gap-2">
+            <NavLink to="/Antecedentes" className="btn btn-outline-light">Antecedentes socioeconómicos</NavLink>
+            <NavLink to="/Solicitudes" className="btn btn-outline-light">Solicitudes/postulaciones</NavLink>
+            <NavLink to="/TNE" className="btn btn-outline-light">TNE</NavLink>
+
+            {isLoggedIn ? (
+              <button className="btn btn-outline-light ms-3" onClick={handleLogout}>
+                <i className="bi bi-box-arrow-right me-2"></i> Cerrar sesión
+              </button>
+            ) : (
+              <NavLink to="/login" className="btn btn-warning fw-bold ms-3">Login</NavLink>
+            )}
+          </div>
         </div>
       </div>
     </nav>

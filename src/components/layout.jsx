@@ -9,12 +9,15 @@ import ContactoPage from '../pages/contacto'
 import QuienesSomosPage from '../pages/quienesSomos'
 import Login from '../pages/login'
 import AgendarHora from '../pages/agendarHora'
+import Solicitudes from '../pages/Solicitudes'
+import Antecedentes from '../pages/Antecedentes'
 
 import NavBar from '../components/nav_bar'
 import Footer from './footer'
 
 // ⬇️ Importa el AuthProvider
 import { AuthProvider } from '../context/authContext'
+import TNE from '../pages/TNE'
 
 const Layout = () => {
   return (
@@ -33,6 +36,9 @@ const Layout = () => {
               <Route path="/quienesSomos" element={<QuienesSomosPage />} />
               <Route path="/login" element={<Login />} />
               <Route path="/agendarHora" element={<AgendarHora />} />
+              <Route path="/Antecedentes" element={<Antecedentes />} />
+              <Route path="/Solicitudes" element={<Solicitudes />} />
+              <Route path="/TNE" element={<TNE />} />
             </Routes>
           </div>
           <Footer />
