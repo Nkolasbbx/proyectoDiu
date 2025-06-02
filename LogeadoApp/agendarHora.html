@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Página Principal</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+  body {
+    background: #f4f4f4;
+    font-family: sans-serif;
+  }
+
+  .container-main {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 30px;
+    margin-top: 20px;
+  }
+
+  .form-wrapper {
+    background-color: #0d6efd;
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 800px;
+    width: 100%;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+  }
+
+    .container-steps {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+
+    .step-box {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      color: black;
+    }
+
+    .step {
+      display: none;
+      transition: all 0.3s ease;
+    }
+
+    .step.active {
+      display: block;
+    }
+
+    .card-doctor {
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: 0.3s;
+    }
+
+    .card-doctor:hover,
+    .card-doctor.selected {
+      border-color: #0d6efd;
+      background-color: #eaf1ff;
+    }
+
+    .hour-btn {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+      text-align: center;
+      border: 1px solid #0d6efd;
+      border-radius: 6px;
+      padding: 10px;
+      color: #0d6efd;
+      background-color: white;
+      cursor: pointer;
+    }
+
+    .hour-btn.selected {
+      background-color: #0d6efd;
+      color: white;
+    }
+
+    .btn-back {
+    margin-top: 15px;
+  }
+  </style>
+</head>
+<body>
+
+<div id="header"></div>
+<script>
+  fetch('header.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('header').innerHTML = data;
+    });
+</script>
+
+
+<section class="hero-quienes-somos">
+    <div class="hero-overlay text-white">
+    <h1 class="display-5 fw-bold">Agendar Hora</h1>
+    </div>
+</section>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+<section class="container-main">
+    <div class="form-wrapper text-white">
+      <div class="container-steps">
+  
+        <!-- Paso 1: Tipo de atención -->
+        <div class="step-box step active" id="step1">
+          <h4>¿Qué atención necesitas?</h4>
+          <select id="tipoAtencion" class="form-select mt-3">
+            <option value="">Selecciona una opción</option>
+            <option value="Asistente Social">Asistente Social</option>
+            <option value="Psicólogo">Psicólogo</option>
+            <option value="Dentista">Dentista</option>
+          </select>
+          <button class="btn btn-outline-primary mt-4 w-100" onclick="irAFecha()">Siguiente</button>
+          <button class="btn btn-secondary mt-2 w-100" onclick="mostrarPaso(6)">Ver citas agendadas</button>
+        </div>
+  
+        <!-- Paso 2: Fecha -->
+        <div class="step-box step" id="step2">
+          <h4>Selecciona una fecha</h4>
+          <input type="date" id="fecha" class="form-control mt-3" />
+          <button class="btn btn-outline-primary mt-4 w-100" onclick="irADoctores()">Siguiente</button>
+          <button class="btn btn-secondary btn-back w-100" onclick="mostrarPaso(1)">Volver</button>
+        </div>
+  
+        <!-- Paso 3: Profesional -->
+        <div class="step-box step" id="step3">
+          <h4 id="fechaTexto">Profesionales disponibles</h4>
+          <div class="mt-3" id="listaDoctores"></div>
+          <button class="btn btn-light btn-back w-100" onclick="mostrarPaso(2)">Volver</button>
+        </div>
+  
+        <!-- Paso 4: Horarios -->
+        <div class="step-box step" id="step4">
+          <h4 id="doctorSeleccionado">Horas disponibles</h4>
+          <div id="horasDisponibles" class="mt-3"></div>
+          <button class="btn btn-primary w-100 mt-3" onclick="confirmarCita()">Confirmar cita</button>
+          <button class="btn btn-light btn-back w-100" onclick="mostrarPaso(3)">Volver</button>
+        </div>
+  
+        <!-- Paso 5: Confirmación -->
+        <div class="step-box step" id="step5">
+          <h4>¡Cita agendada!</h4>
+          <p class="mt-3">Tu cita ha sido agendada con éxito.</p>
+          <button class="btn btn-secondary mt-2 w-100" onclick="mostrarPaso(6)">Ver citas agendadas</button>
+        </div>
+  
+        <!-- Paso 6: Citas agendadas -->
+        <div class="step-box step" id="step6">
+          <h4>Tus citas agendadas</h4>
+          <div id="listaCitas" class="mt-3"></div>
+          <button class="btn btn-secondary btn-back w-100 mt-3" onclick="mostrarPaso(1)">Volver</button>
+        </div>
+  
+      </div>
+    </div>
+  </section>
+  
+  <div id="footer"></div>
+  <script>
+    fetch('footer.htm')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('footer').innerHTML = data;
+      });
+  </script>
+  
+  <script>
+    const profesionales = {
+      'Asistente Social': ['Carmen Cardenas', 'Katia Puyol','Marisol Rojas'],
+      'Psicólogo': ['Cristobal Cortazar', 'Enrique Cornejo','Maria Berrios','Andrea Schifferli','Josefa Goic','Soledad Kobilic'],
+      'Dentista': ['Matias Perez', 'Bernardita Cruchaga']
+    };
+  
+    const horarios = {
+      'Carmen Cardenas': ['09:00', '10:30', '12:00'],
+      'Katia Puyol': ['09:00', '10:00', '13:30'],
+      'Marisol Rojas': ['08:30', '12:15', '16:00'],
+      'Matias Perez': ['08:30', '12:00', '16:00'],
+      'Bernardita Cruchaga': ['10:00', '11:30', '15:00'],
+      'Cristobal Cortazar': ['10:00', '11:30', '15:00'],
+      'Enrique Cornejo': ['10:00', '11:30', '15:00'],
+      'Maria Berrios': ['10:00', '11:30', '15:00'],
+      'Andrea Schifferli': ['10:00', '11:30', '15:00'],
+      'Josefa Goic': ['10:00', '11:30', '15:00'],
+      'Soledad Kobilic': ['10:00', '11:30', '15:00']
+    };
+  
+    let tipo = '', doctor = '', hora = '';
+    let citasAgendadas = [
+      { tipo: 'Psicólogo', doctor: 'Luis Soto', fecha: '2025-04-25', hora: '12:15' },
+      { tipo: 'Dentista', doctor: 'Carlos Gómez', fecha: '2025-04-26', hora: '08:30' }
+    ];
+  
+    function mostrarPaso(num) {
+      document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+      document.getElementById(`step${num}`).classList.add('active');
+  
+      if (num === 6) mostrarCitas();
+    }
+  
+    function irAFecha() {
+      tipo = document.getElementById('tipoAtencion').value;
+      if (!tipo) {
+        alert('Por favor selecciona un tipo de atención.');
+        return;
+      }
+      mostrarPaso(2);
+    }
+  
+    function irADoctores() {
+      const fecha = document.getElementById('fecha').value;
+      if (!fecha) {
+        alert('Selecciona una fecha primero.');
+        return;
+      }
+
+      const fechaLocal = new Date(fecha + 'T00:00:00'); // <-- Corrección aquí
+      document.getElementById('fechaTexto').innerText = `Disponibles el ${fechaLocal.toLocaleDateString('es-CL')} (${tipo})`;
+
+      const lista = document.getElementById('listaDoctores');
+      lista.innerHTML = '';
+
+      profesionales[tipo].forEach(nombre => {
+        const card = document.createElement('div');
+        card.className = 'card card-doctor mb-2';
+        card.innerHTML = `<div class="card-body">${nombre}</div>`;
+        card.onclick = () => seleccionarDoctor(nombre, card);
+        lista.appendChild(card);
+      });
+
+  mostrarPaso(3);
+}
+  
+    function seleccionarDoctor(nombre, card) {
+      doctor = nombre;
+      document.querySelectorAll('.card-doctor').forEach(el => el.classList.remove('selected'));
+      card.classList.add('selected');
+  
+      document.getElementById('doctorSeleccionado').innerText = `Horas disponibles con ${nombre}`;
+      const contenedorHoras = document.getElementById('horasDisponibles');
+      contenedorHoras.innerHTML = '';
+  
+      horarios[nombre].forEach(h => {
+        const btn = document.createElement('div');
+        btn.className = 'hour-btn';
+        btn.textContent = h;
+        btn.onclick = () => {
+          document.querySelectorAll('.hour-btn').forEach(b => b.classList.remove('selected'));
+          btn.classList.add('selected');
+          hora = h;
+        };
+        contenedorHoras.appendChild(btn);
+      });
+  
+      mostrarPaso(4);
+    }
+  
+    function confirmarCita() {
+      if (!hora) {
+        alert('Selecciona una hora para continuar.');
+        return;
+      }
+  
+      const fecha = document.getElementById('fecha').value;
+      citasAgendadas.push({ tipo, doctor, fecha, hora });
+      mostrarPaso(5);
+    }
+  
+    function mostrarCitas() {
+      const contenedor = document.getElementById('listaCitas');
+      contenedor.innerHTML = '';
+
+      if (citasAgendadas.length === 0) {
+        contenedor.innerHTML = '<p class="text-light">No tienes citas agendadas.</p>';
+        return;
+      }
+
+      citasAgendadas.forEach((cita, index) => {
+        const card = document.createElement('div');
+        card.className = 'card card-doctor mb-2';
+        card.innerHTML = `
+          <div class="card-body">
+            <strong>${cita.tipo}</strong><br>
+            ${cita.doctor} - ${new Date(cita.fecha + 'T00:00:00').toLocaleDateString('es-CL')} a las ${cita.hora}
+            <button class="btn btn-sm btn-danger float-end" onclick="cancelarCita(${index})">Cancelar</button>
+          </div>
+        `;
+        contenedor.appendChild(card);
+      });
+    }
+  
+    function cancelarCita(index) {
+      const cita = citasAgendadas[index];
+      if (confirm(`¿Seguro que deseas cancelar la cita con ${cita.doctor} el ${cita.fecha} a las ${cita.hora}?`)) {
+        citasAgendadas.splice(index, 1);
+        mostrarCitas();
+      }
+    }
+  </script>
+  

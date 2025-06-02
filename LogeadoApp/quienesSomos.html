@@ -1,0 +1,69 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Página Principal</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Incluir el header con JavaScript -->
+  <div id="header"></div>
+  <script>
+    fetch('header.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('header').innerHTML = data;
+      });
+  </script>
+
+    <section class="hero-quienes-somos">
+        <div class="hero-overlay text-white">
+        <h1 class="display-5 fw-bold">Quienes somos</h1>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="row mt-4">
+            <div class="col-md-8">
+                <h2 class="text-dark">Dirección de Relaciones Estudiantiles</h2>
+                <p class="text-justify">La Dirección de Relaciones Estudiantiles contribuye a la formación integral de la comunidad estudiantil de todos los Campus y Sedes de la USM. Provee apoyo psicosocial, asistencial y de fomento a iniciativas del estudiantado, con el objetivo de acompañarlos y ayudarlos durante su vida universitaria, especialmente atendiendo al legado testamentario de nuestro fundador.</p>
+                
+                <p>La Dirección de Relaciones Estudiantiles está dirigida por Cecilia Reyes Covarrubias y tiene representación en todos los emplazamientos USM:</p>
+                <ul>
+                    <li>Campus Casa Central Valparaíso: Paulina Pereda, Jefa de Relaciones Estudiantiles.</li>
+                    <li>Sede Viña del Mar: Claudia Oyarce, Jefa de Bienestar Estudiantil.</li>
+                    <li>Campus Santiago San Joaquín: Rodrigo Pérez, Subdirector de Relaciones Estudiantiles.</li>
+                    <li>Campus Santiago Vitacura: Rodrigo Pérez, Subdirector de Relaciones Estudiantiles.</li>
+                    <li>Sede Concepción: Javier Aliaga, Jefe de Bienestar Estudiantil. </li>
+
+            </div>
+        </div>
+    </div>
+    
+    <div class="container mt-4 mb-4">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <img src="img/organigrama.png" alt="Dirección de Relaciones Estudiantiles" class="img-fluid">
+            </div>
+        </div>
+
+
+        
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+<!-- Incluir el footer con JavaScript -->
+<script>
+    fetch('footer.htm')
+      .then(response => response.text())
+      .then(data => {
+        document.body.insertAdjacentHTML('beforeend', data);
+      });
+  </script>
+
+</html>
