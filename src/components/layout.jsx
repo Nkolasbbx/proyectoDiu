@@ -7,31 +7,38 @@ import ServiciosPage from '../pages/servicios'
 import BeneficiosPage from '../pages/beneficios'
 import ContactoPage from '../pages/contacto'
 import QuienesSomosPage from '../pages/quienesSomos'
+import Login from '../pages/login'
+import AgendarHora from '../pages/agendarHora'
 
 import NavBar from '../components/nav_bar'
 import Footer from './footer'
 
+// ⬇️ Importa el AuthProvider
+import { AuthProvider } from '../context/authContext'
+
 const Layout = () => {
   return (
     <BrowserRouter>
-      <div className='layout'>
-        <NavBar />
-        <div className='layout__page'>
-          <Routes>
-            <Route path='/' element={<HomePage />} />
-            <Route path='/lightbulb' element={<LightbulbPage />} />
-            <Route path="/servicios" element={<ServiciosPage />} />
-            <Route path="/beneficios" element={<BeneficiosPage />} />
-            <Route path="/contacto" element={<ContactoPage />} />
-            <Route path="/quienesSomos" element={<QuienesSomosPage />} />
-            
-            
-          </Routes>
+      {/* ⬅️ Envuelve toda la aplicación con AuthProvider */}
+      <AuthProvider>
+        <div className='layout'>
+          <NavBar />
+          <div className='layout__page'>
+            <Routes>
+              <Route path='/' element={<HomePage />} />
+              <Route path='/lightbulb' element={<LightbulbPage />} />
+              <Route path="/servicios" element={<ServiciosPage />} />
+              <Route path="/beneficios" element={<BeneficiosPage />} />
+              <Route path="/contacto" element={<ContactoPage />} />
+              <Route path="/quienesSomos" element={<QuienesSomosPage />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/agendarHora" element={<AgendarHora />} />
+            </Routes>
+          </div>
+          <Footer />
         </div>
-        <Footer />
-      </div>
+      </AuthProvider>
     </BrowserRouter>
   )
 }
-
 export default Layout

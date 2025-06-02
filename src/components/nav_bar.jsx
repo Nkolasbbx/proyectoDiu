@@ -1,12 +1,25 @@
 import React from 'react'
 import '../stylesheets/NavBar.scss'
-import { NavLink } from 'react-router-dom'
+import { useAuth } from '../context/authContext';
+import { NavLink, useNavigate } from 'react-router-dom'
 import logo from '../assets/logo.png'
 
 export const NavBar = () => {
+  const { isLoggedIn, logout } = useAuth();
+  const navigate = useNavigate();
+
   const handleSolicitarHora = (e) => {
-    e.preventDefault()
-    alert('Debes iniciar sesión para solicitar una hora.')
+    e.preventDefault();
+    if (isLoggedIn) {
+      navigate('/agendarHora'); // Ruta de la vista "Solicitar hora"
+    } else {
+      alert('Debes iniciar sesión para solicitar una hora.');
+    }
+  }
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');  // Redirige a la página principal después de cerrar sesión
   }
 
   const navLinkClass = ({ isActive }) =>
@@ -33,10 +46,17 @@ export const NavBar = () => {
               <NavLink to="/contacto" className={navLinkClass}>Contacto</NavLink>
             </li>
             <li className="nav-item">
+              {/* Aquí el link de solicitar hora */}
               <a href="#" className="nav-link" onClick={handleSolicitarHora}>Solicitar hora</a>
             </li>
           </ul>
-          <NavLink to="/login" className="btn btn-warning fw-bold">Login</NavLink>
+          {isLoggedIn ? (
+            <button className="btn btn-outline-light" onClick={handleLogout}>
+              <i className="bi bi-box-arrow-right me-2"></i> Cerrar sesión
+            </button>
+          ) : (
+            <NavLink to="/login" className="btn btn-warning fw-bold">Login</NavLink>
+          )}
         </div>
       </div>
     </nav>
