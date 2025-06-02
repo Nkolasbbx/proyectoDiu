@@ -37,6 +37,9 @@ export const NavBar = () => {
         <div className="collapse navbar-collapse justify-content-between" id="navbarNav">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
+              <NavLink to="/" className={navLinkClass}>Página principal</NavLink>
+            </li>
+            <li className="nav-item">
               <NavLink to="/quienesSomos" className={navLinkClass}>Quienes somos</NavLink>
             </li>
             <li className="nav-item">
