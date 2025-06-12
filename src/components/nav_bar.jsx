@@ -1,11 +1,14 @@
-import React from 'react'
-import '../stylesheets/NavBar.scss'
+import React from 'react';
+import '../stylesheets/NavBar.scss';
 import { useAuth } from '../context/authContext';
-import { NavLink, useNavigate } from 'react-router-dom'
-import logo from '../assets/logo.png'
+import { NavLink, useNavigate } from 'react-router-dom';
+import logo from '../assets/logo.png';
+import iconoPerfil from '../assets/icono-perfil.png';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js'; 
 
 export const NavBar = () => {
-  const { isLoggedIn, logout } = useAuth();
+  const { isLoggedIn, logout, user } = useAuth();
   const navigate = useNavigate();
 
   const handleSolicitarHora = (e) => {
@@ -15,15 +18,15 @@ export const NavBar = () => {
     } else {
       alert('Debes iniciar sesión para solicitar una hora.');
     }
-  }
+  };
 
   const handleLogout = () => {
     logout();
     navigate('/');
-  }
+  };
 
   const navLinkClass = ({ isActive }) =>
-    `nav-link${isActive ? ' active fw-bold' : ''}`
+    `nav-link${isActive ? ' active fw-bold' : ''}`;
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark navbar-custom px-4 py-3">
@@ -31,9 +34,15 @@ export const NavBar = () => {
         <NavLink className="navbar-brand" to="/">
           <img src={logo} alt="Logo" height="40" />
         </NavLink>
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <button 
+          className="navbar-toggler" 
+          type="button" 
+          data-bs-toggle="collapse" 
+          data-bs-target="#navbarNav"
+        >
           <span className="navbar-toggler-icon"></span>
         </button>
+        
         <div className="collapse navbar-collapse justify-content-between" id="navbarNav">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
@@ -54,14 +63,43 @@ export const NavBar = () => {
           </ul>
 
           <div className="d-flex align-items-center gap-2">
-            <NavLink to="/Antecedentes" className="btn btn-outline-light">Antecedentes socioeconómicos</NavLink>
-            <NavLink to="/Solicitudes" className="btn btn-outline-light">Solicitudes/postulaciones</NavLink>
-            <NavLink to="/TNE" className="btn btn-outline-light">TNE</NavLink>
-
             {isLoggedIn ? (
-              <button className="btn btn-outline-light ms-3" onClick={handleLogout}>
-                <i className="bi bi-box-arrow-right me-2"></i> Cerrar sesión
-              </button>
+              <div className="dropdown">
+                <button 
+                  className="btn dropdown-toggle d-flex align-items-center gap-2" 
+                  type="button" 
+                  id="dropdownMenuButton" 
+                  data-bs-toggle="dropdown" 
+                  aria-expanded="false"
+                  style={{background: 'transparent', border: 'none'}}
+                >
+                  <img 
+                    src={iconoPerfil} 
+                    alt="Perfil" 
+                    height="40" 
+                    className="rounded-circle"
+                  />
+                </button>
+                
+                <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+                  <li>
+                    <NavLink className="dropdown-item" to="/miPerfil">
+                      Mi perfil
+                    </NavLink>
+                  </li>
+                  <li>
+                    <hr className="dropdown-divider" />
+                  </li>
+                  <li>
+                    <button 
+                      className="dropdown-item text-danger" 
+                      onClick={handleLogout}
+                    >
+                      Cerrar sesión
+                    </button>
+                  </li>
+                </ul>
+              </div>
             ) : (
               <NavLink to="/login" className="btn btn-warning fw-bold ms-3">Login</NavLink>
             )}
@@ -69,7 +107,7 @@ export const NavBar = () => {
         </div>
       </div>
     </nav>
-  )
-}
+  );
+};
 
-export default NavBar
+export default NavBar;

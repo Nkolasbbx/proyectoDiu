@@ -1,12 +1,15 @@
 import React from 'react';
 import organigramaImage from '../assets/organigrama.png'; // Asegúrate de tener la imagen en tu carpeta assets
 
+
+
 const QuienesSomos = () => {
+  
   return (
     <>
       {/* Sección Hero */}
       <section className="hero-quienes-somos">
-        <div className="hero-overlay text-white">
+        <div className="hero-overlay text-dark">
           <h1 className="display-5 fw-bold">Quienes somos</h1>
         </div>
       </section>

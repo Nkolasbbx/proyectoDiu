@@ -10,7 +10,7 @@ export const HomePage = () => {
     <>
       {/* Contenido de la página */}
       <section className="hero">
-        <div className="hero-overlay text-white">
+        <div className="hero-overlay text-dark">
           <h1 className="display-5 fw-bold">Dirección de relaciones estudiantiles</h1>
           <p className="lead">Accede a los distintos servicios de la universidad</p>
         </div>

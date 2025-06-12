@@ -11,6 +11,7 @@ import Login from '../pages/login'
 import AgendarHora from '../pages/agendarHora'
 import Solicitudes from '../pages/Solicitudes'
 import Antecedentes from '../pages/Antecedentes'
+import MiPerfil from '../pages/miPerfil'
 
 import NavBar from '../components/nav_bar'
 import Footer from './footer'
@@ -39,6 +40,7 @@ const Layout = () => {
               <Route path="/Antecedentes" element={<Antecedentes />} />
               <Route path="/Solicitudes" element={<Solicitudes />} />
               <Route path="/TNE" element={<TNE />} />
+              <Route path="/miPerfil" element={<MiPerfil />} />
             </Routes>
           </div>
           <Footer />
