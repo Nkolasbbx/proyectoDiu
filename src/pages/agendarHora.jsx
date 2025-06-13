@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const profesionales = {
   "Asistente Social": ["Carmen Cardenas", "Katia Puyol", "Marisol Rojas"],
@@ -111,24 +112,39 @@ export default function AgendaSeparada() {
     );
   };
 
-  return (
-    <div
-      className="container"
-      style={{ maxWidth: 750, margin: "auto", padding: 20 }}
-    >
+return (
+  <>
+    {/* Migas de pan independientes */}
+    <div className="container-fluid px-4 pt-3">
+      <nav aria-label="breadcrumb">
+        <ol className="breadcrumb">
+          <li className="breadcrumb-item">
+            <Link to="/">Página principal</Link>
+          </li>
+          <li className="breadcrumb-item active" aria-current="page">
+            Solicitar hora
+          </li>
+        </ol>
+      </nav>
+    </div>
+
+    {/* Sección Hero */}
+    <section className="hero-quienes-somos">
+      <div className="hero-overlay text-dark">
+        <h1 className="display-5 fw-bold">Solicitar hora</h1>
+      </div>
+    </section>
+
+    <div className="container" style={{ maxWidth: 750, margin: "auto", padding: 20 }}>
       <nav className="d-flex gap-2 mb-4">
         <button
-          className={`btn ${
-            vista === "agendar" ? "btn-primary" : "btn-outline-primary"
-          }`}
+          className={`btn ${vista === "agendar" ? "btn-primary" : "btn-outline-primary"}`}
           onClick={() => setVista("agendar")}
         >
           Agendar Hora
         </button>
         <button
-          className={`btn ${
-            vista === "misHoras" ? "btn-primary" : "btn-outline-primary"
-          }`}
+          className={`btn ${vista === "misHoras" ? "btn-primary" : "btn-outline-primary"}`}
           onClick={() => setVista("misHoras")}
         >
           Mis Horas
@@ -193,11 +209,7 @@ export default function AgendaSeparada() {
                   <strong>{fecha}</strong>
                   <div className="d-flex flex-wrap gap-2 mt-2">
                     {horariosBase.map((hora) => {
-                      const ocupada = horaOcupada(
-                        profesionalSeleccionado,
-                        fecha,
-                        hora
-                      );
+                      const ocupada = horaOcupada(profesionalSeleccionado, fecha, hora);
                       const seleccionada =
                         seleccionHora &&
                         seleccionHora.fecha === fecha &&
@@ -210,9 +222,7 @@ export default function AgendaSeparada() {
                             seleccionada ? "btn-success" : "btn-outline-primary"
                           }`}
                           disabled={ocupada}
-                          onClick={() =>
-                            setSeleccionHora({ fecha: fecha, hora: hora })
-                          }
+                          onClick={() => setSeleccionHora({ fecha: fecha, hora: hora })}
                         >
                           {hora}
                         </button>
@@ -229,7 +239,6 @@ export default function AgendaSeparada() {
                 Confirmar hora
               </button>
 
-              {/* Mensajes */}
               {mensajeError && (
                 <div className="alert alert-danger mt-3">{mensajeError}</div>
               )}
@@ -270,5 +279,6 @@ export default function AgendaSeparada() {
         </div>
       )}
     </div>
-  );
+  </>
+);
 }

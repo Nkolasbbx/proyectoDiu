@@ -7,6 +7,15 @@ import sanJoaquin from '../assets/sanjoaquin.jpg';
 export const HomePage = () => {
   return (
     <>
+    <div className="container-fluid px-4 pt-3">
+            <nav aria-label="breadcrumb">
+              <ol className="breadcrumb">
+                <li className="breadcrumb-item">
+                  <Link to="/">Página principal</Link>
+                </li>
+              </ol>
+            </nav>
+          </div>
       {/* Sección Hero */}
       <section className="hero">
         <div className="hero-overlay text-dark">

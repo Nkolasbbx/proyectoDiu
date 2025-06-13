@@ -1,14 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom'; // Faltaba esta línea
 import contactoImagen from '../assets/contacto.jpg';
 
 const Contacto = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
-    
+
     const formData = new FormData(event.target);
     const formValues = Object.fromEntries(formData.entries());
-    
-    // Verificar que todos los campos estén completos
+
     const isFormValid = Object.values(formValues).every(
       value => value.trim() !== ''
     );
@@ -18,22 +18,36 @@ const Contacto = () => {
       return;
     }
 
-    // Mostrar mensaje de confirmación
     alert('Gracias por contactarnos. Nos pondremos en contacto con usted en brevedad.');
     event.target.reset();
   };
 
   return (
     <>
-      {/* Contenido de la página */}
+      {/* Migas de pan arriba del hero */}
+      <div className="container-fluid px-4 pt-3">
+        <nav aria-label="breadcrumb">
+          <ol className="breadcrumb">
+            <li className="breadcrumb-item">
+              <Link to="/">Página principal</Link>
+            </li>
+            <li className="breadcrumb-item active" aria-current="page">
+              Contacto
+            </li>
+          </ol>
+        </nav>
+      </div>
+
+      {/* Sección Hero */}
       <section className="hero-quienes-somos">
-        <div className="hero-overlay text-white">
+        <div className="hero-overlay text-dark">
           <h1 className="display-5 fw-bold">Contacto</h1>
         </div>
       </section>
+
       <br /><br />
 
-      <div className="container mt-5">
+      <div className="container mt-0">
         <div className="row">
           <div className="col-md-6">
             <div className="form-container">

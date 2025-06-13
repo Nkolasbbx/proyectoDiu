@@ -1,16 +1,28 @@
 import React from 'react';
-import organigramaImage from '../assets/organigrama.png'; // Asegúrate de tener la imagen en tu carpeta assets
-
-
+import { Link } from 'react-router-dom';
+import organigramaImage from '../assets/organigrama.png';
 
 const QuienesSomos = () => {
-  
   return (
     <>
+      {/* Migas de pan arriba del hero */}
+      <div className="container-fluid px-4 pt-3">
+        <nav aria-label="breadcrumb">
+          <ol className="breadcrumb">
+            <li className="breadcrumb-item">
+              <Link to="/">Página principal</Link>
+            </li>
+            <li className="breadcrumb-item active" aria-current="page">
+              Quiénes somos
+            </li>
+          </ol>
+        </nav>
+      </div>
+
       {/* Sección Hero */}
       <section className="hero-quienes-somos">
         <div className="hero-overlay text-dark">
-          <h1 className="display-5 fw-bold">Quienes somos</h1>
+          <h1 className="display-5 fw-bold">Quiénes somos</h1>
         </div>
       </section>
 
@@ -25,7 +37,6 @@ const QuienesSomos = () => {
               y de fomento a iniciativas del estudiantado, con el objetivo de acompañarlos y ayudarlos 
               durante su vida universitaria, especialmente atendiendo al legado testamentario de nuestro fundador.
             </p>
-            
             <p>
               La Dirección de Relaciones Estudiantiles está dirigida por Cecilia Reyes Covarrubias 
               y tiene representación en todos los emplazamientos USM:
@@ -40,7 +51,7 @@ const QuienesSomos = () => {
           </div>
         </div>
       </div>
-      
+
       {/* Imagen del organigrama */}
       <div className="container mt-4 mb-4">
         <div className="row">

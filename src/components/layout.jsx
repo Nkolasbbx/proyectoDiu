@@ -19,6 +19,7 @@ import Footer from './footer'
 // ⬇️ Importa el AuthProvider
 import { AuthProvider } from '../context/authContext'
 import TNE from '../pages/TNE'
+import PublicacionesPage from '../pages/publicaciones'
 
 const Layout = () => {
   return (
@@ -34,6 +35,7 @@ const Layout = () => {
               <Route path="/servicios" element={<ServiciosPage />} />
               <Route path="/beneficios" element={<BeneficiosPage />} />
               <Route path="/contacto" element={<ContactoPage />} />
+              <Route path="/publicaciones" element={<PublicacionesPage />} />
               <Route path="/quienesSomos" element={<QuienesSomosPage />} />
               <Route path="/login" element={<Login />} />
               <Route path="/agendarHora" element={<AgendarHora />} />
