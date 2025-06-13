@@ -4,7 +4,7 @@ const MiPerfil = () => {
   // Datos del usuario que puedes modificar manualmente
   const [userData, setUserData] = useState({
     name: "Juan Pérez",
-    email: "juan.perez@uusm.cl",
+    email: "juan.perez@usm.cl",
     phone: "+56 9 1234 5678",
     address: "Av. Principal 123, Santiago",
     birthDate: "21-01-2003",
