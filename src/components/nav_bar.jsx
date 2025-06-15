@@ -58,7 +58,14 @@ export const NavBar = () => {
               <NavLink to="/contacto" className={navLinkClass}>Contacto</NavLink>
             </li>
             <li className="nav-item">
-              <a href="#" className="nav-link" onClick={handleSolicitarHora}>Solicitar hora</a>
+              <NavLink 
+                to={isLoggedIn ? "/agendarHora" : "#"} 
+                className={navLinkClass}
+                onClick={!isLoggedIn ? handleSolicitarHora : undefined}
+              >
+                Solicitar hora
+              </NavLink>
+
             </li>
           </ul>
 

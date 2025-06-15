@@ -24,29 +24,37 @@ const Contacto = () => {
 
   return (
     <>
-      {/* Migas de pan arriba del hero */}
-      <div className="container-fluid px-4 pt-3">
-        <nav aria-label="breadcrumb">
-          <ol className="breadcrumb">
-            <li className="breadcrumb-item">
-              <Link to="/">Página principal</Link>
-            </li>
-            <li className="breadcrumb-item active" aria-current="page">
-              Contacto
-            </li>
-          </ol>
-        </nav>
+      {/* Migas de pan mejoradas visualmente */}
+      <div className="bg-light py-2 border-bottom mb-3">
+        <div className="container px-4">
+          <nav aria-label="breadcrumb">
+            <ol className="breadcrumb mb-0">
+              <li className="breadcrumb-item">
+                <Link to="/" className="text-decoration-none text-primary">
+                  🏠 Inicio
+                </Link>
+              </li>
+              <li className="breadcrumb-item active text-secondary" aria-current="page">
+                Contacto
+              </li>
+            </ol>
+          </nav>
+        </div>
       </div>
 
+
       {/* Sección Hero */}
-      <section className="hero-quienes-somos">
-        <div className="hero-overlay text-dark">
+      <section className="hero-quienes-somos bg-light py-5">
+        <div className="container">
           <h1 className="display-5 fw-bold">Contacto</h1>
+          <p className="lead">Si tienes alguna consulta, no dudes en contactarnos. Estamos aquí para ayudarte.</p>
         </div>
       </section>
 
+
       <br /><br />
 
+      
       <div className="container mt-0">
         <div className="row">
           <div className="col-md-6">
@@ -138,7 +146,8 @@ const Contacto = () => {
                     required
                   ></textarea>
                 </div>
-                <button type="submit" className="btn-enviar">
+                <br />
+                <button type="submit" className="btn-enviar" class="btn btn-primary"  >
                   Enviar
                 </button>
               </form>
